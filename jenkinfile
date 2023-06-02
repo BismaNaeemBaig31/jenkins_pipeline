@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('User Input') {
+            steps {
+                input message: 'Please provide your information',
+                      parameters: [
+                          string(name: 'NAME', defaultValue: '', description: 'Your name'),
+                          string(name: 'AGE', defaultValue: '', description: 'Your age')
+                          choice(name: 'GENDER', choice: ['Male', 'Female'], description: 'select Gender' )
+                      ]
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Hi welcome "${params.NAME}" you are "${params.AGE}" year's old you are "${params.GENDER}"
+
+            }
+        }
+    }
+}
